@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://alee123:alee123@meditation-journal.w8jvc.mongodb.net/Meditation-Journal?retryWrites=true&w=majority",
+  "jwtSecret": "secret"
+}
