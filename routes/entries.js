@@ -64,8 +64,8 @@ router.post(
   }
 );
 
-// @route   PUT api/contacts/:id
-// @desc    Update contact
+// @route   PUT api/entries/:id
+// @desc    Update entry
 // @access  Private
 router.put("/:id", auth, async (req, res) => {
   const { date, log, effective, question } = req.body;
@@ -93,7 +93,7 @@ router.put("/:id", auth, async (req, res) => {
       { new: true }
     );
 
-    res.json(contact);
+    res.json(entry);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
