@@ -62,7 +62,7 @@ export default (state, action) => {
         ...state,
         filtered: state.entries.filter((entry) => {
           const regex = new RegExp(`${action.payload}`, "gi");
-          return entry.date.match(regex) || entry.log.match(regex);
+          return entry.log.match(regex);
         }),
       };
     case CLEAR_FILTER:

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Home from "./components/pages/Home";
@@ -12,6 +12,7 @@ import EntryState from "./context/entry/EntryState";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import setAuthToken from "./context/utils/setAuthToken";
+import M from "materialize-css/dist/js/materialize.min.js";
 import "./App.css";
 
 if (localStorage.token) {
@@ -19,6 +20,10 @@ if (localStorage.token) {
 }
 
 const App = () => {
+  useEffect(() => {
+    // Init Materialize JS
+    M.AutoInit();
+  });
   return (
     <AuthState>
       <EntryState>
