@@ -13,11 +13,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="grid-2">
+    <div className="container">
       <div>
+        <a
+          href="#entry-form-modal"
+          className="btn btn-primary btn-block modal-trigger"
+        >
+          Create Journal Entry
+        </a>
         <EntryForm />
-      </div>
-      <div>
         <EntryFilter />
         <Entries />
       </div>

@@ -12,6 +12,7 @@ import EntryState from "./context/entry/EntryState";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 import setAuthToken from "./context/utils/setAuthToken";
+import "materialize-css/dist/css/materialize.min.css";
 import M from "materialize-css/dist/js/materialize.min.js";
 import "./App.css";
 
