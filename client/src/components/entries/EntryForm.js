@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import EntryContext from "../../context/entry/entryContext";
+import M from "materialize-css/dist/js/materialize.min.js";
 
 const EntryForm = () => {
   const entryContext = useContext(EntryContext);
@@ -31,6 +32,9 @@ const EntryForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (log === "" || effective === "") {
+      M.toast({ html: "Please enter these! They're useful 💚" });
+    }
     if (current === null) {
       addEntry(entry);
     } else {
