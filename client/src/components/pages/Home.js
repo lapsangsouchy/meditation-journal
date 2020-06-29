@@ -3,6 +3,8 @@ import Entries from "../entries/Entries";
 import EntryForm from "../entries/EntryForm";
 import EntryFilter from "../entries/EntryFilter";
 import AuthContext from "../../context/auth/authContext";
+import M from "materialize-css/dist/js/materialize.min.js";
+import "materialize-css/dist/css/materialize.min.css";
 
 const Home = () => {
   const authContext = useContext(AuthContext);
@@ -12,20 +14,16 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
+  document.addEventListener("DOMContentLoaded", function () {
+    var elems = document.querySelectorAll(".modal");
+    M.Modal.init(elems);
+  });
+
   return (
     <div className="container">
       <EntryForm />
-      <div>
-        <a
-          href="#entry-form-modal"
-          className="btn btn-primary btn-block modal-trigger"
-        >
-          Create Journal Entry
-        </a>
-
-        <EntryFilter />
-        <Entries />
-      </div>
+      <EntryFilter />
+      <Entries />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import EntryContext from "../../context/entry/entryContext";
-import M from "materialize-css/dist/js/materialize.min.js";
+import M, { Modal } from "materialize-css/dist/js/materialize.min.js";
+import "materialize-css/dist/css/materialize.min.css";
 
 const EntryForm = () => {
   const entryContext = useContext(EntryContext);
@@ -9,6 +10,11 @@ const EntryForm = () => {
 
   var effectiveRange = document.querySelectorAll("input[type=range]");
   M.Range.init(effectiveRange);
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var elems = document.querySelectorAll(".modal");
+    M.Modal.init(elems);
+  });
 
   useEffect(() => {
     if (current !== null) {
@@ -50,62 +56,75 @@ const EntryForm = () => {
     clearCurrent();
   };
   return (
-    <div id="entry-form-modal" className="modal" style={modalStyle}>
-      <div className="modal-content">
-        <form onSubmit={onSubmit}>
-          <h2 className="text-primary">
-            {current ? "Edit Entry" : "Add Entry"}
-          </h2>
-          <div className="input-field">
-            <textarea
-              type="text"
-              className="materialize-textarea"
-              name="log"
-              value={log}
-              onChange={onChange}
-            />
-            <label htmlFor="log">How was your meditation?</label>
-          </div>
-          <p>
-            On a scale from 1 to 10 how <strong>Effective</strong> was it?
-          </p>
-          <p className="range-field">
+    <div>
+      <button
+        data-target="entry-form-modal"
+        className="btn btn-primary btn-block modal-trigger"
+      >
+        Create Journal Entry
+      </button>
+
+      <div id="entry-form-modal" className="modal" style={modalStyle}>
+        <div className="modal-content">
+          <form onSubmit={onSubmit}>
+            <h2 className="text-primary">
+              {current ? "Edit Entry" : "Add Entry"}
+            </h2>
+            <div className="input-field">
+              <textarea
+                type="text"
+                className="materialize-textarea"
+                name="log"
+                value={log}
+                onChange={onChange}
+              />
+              {log === "" && (
+                <label htmlFor="log">How was your meditation?</label>
+              )}
+            </div>
+            <p>
+              On a scale from 1 to 10 how <strong>Effective</strong> was it?
+            </p>
+            <p className="range-field">
+              <input
+                type="range"
+                name="effective"
+                id="effective-range"
+                min="0"
+                max="10"
+                value={effective}
+                onChange={onChange}
+              />
+            </p>
             <input
-              type="range"
-              name="effective"
-              id="effective-range"
-              min="0"
-              max="10"
-              value={effective}
+              type="text"
+              placeholder="What questions do you have? (optional)"
+              name="question"
+              value={question}
               onChange={onChange}
             />
-          </p>
-          <input
-            type="text"
-            placeholder="What questions do you have? (optional)"
-            name="question"
-            value={question}
-            onChange={onChange}
-          />
-          <div className="modal-footer">
-            <a
-              onClick={onSubmit}
-              href="#!"
-              className="modal-close btn btn-primary btn-block"
-            >
-              {current ? "Update Entry" : "Add Entry"}{" "}
-            </a>
-            {current && (
+            <div className="modal-footer">
               <a
+                onClick={onSubmit}
                 href="#!"
-                className="modal-close btn btn-light btn-block"
-                onClick={clearAll}
+                className={`btn btn-primary btn-block ${
+                  log !== "" && effective !== "" && "modal-close"
+                }`}
               >
-                Clear
+                {current ? "Update Entry" : "Add Entry"}{" "}
               </a>
-            )}
-          </div>
-        </form>
+              {current && (
+                <a
+                  href="#!"
+                  className="modal-close btn btn-light btn-block"
+                  onClick={clearAll}
+                >
+                  Exit
+                </a>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
