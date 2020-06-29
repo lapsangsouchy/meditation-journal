@@ -14,6 +14,7 @@ const Home = () => {
 
   return (
     <div className="container">
+      <EntryForm />
       <div>
         <a
           href="#entry-form-modal"
@@ -21,7 +22,7 @@ const Home = () => {
         >
           Create Journal Entry
         </a>
-        <EntryForm />
+
         <EntryFilter />
         <Entries />
       </div>
