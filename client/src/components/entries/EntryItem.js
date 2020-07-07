@@ -37,7 +37,7 @@ const EntryItem = ({ entry }) => {
           <br />
           <p>
             <a
-              href="#entry-form-modal"
+              href="#entrymodal"
               className="modal-trigger"
               onClick={() => setCurrent(entry)}
             >

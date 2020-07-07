@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import EntryContext from "../../context/entry/entryContext";
-import M, { Modal } from "materialize-css/dist/js/materialize.min.js";
+import M from "materialize-css/dist/js/materialize.min.js";
 import "materialize-css/dist/css/materialize.min.css";
 
 const EntryForm = () => {
@@ -11,10 +11,10 @@ const EntryForm = () => {
   var effectiveRange = document.querySelectorAll("input[type=range]");
   M.Range.init(effectiveRange);
 
-  document.addEventListener("DOMContentLoaded", function () {
+  useEffect(() => {
     var elems = document.querySelectorAll(".modal");
     M.Modal.init(elems);
-  });
+  }, []);
 
   useEffect(() => {
     if (current !== null) {
@@ -57,14 +57,15 @@ const EntryForm = () => {
   };
   return (
     <div>
-      <button
-        data-target="entry-form-modal"
-        className="btn btn-primary btn-block modal-trigger"
-      >
-        Create Journal Entry
-      </button>
-
-      <div id="entry-form-modal" className="modal" style={modalStyle}>
+      <div>
+        <a
+          href="#entrymodal"
+          className="btn btn-primary btn-block modal-trigger"
+        >
+          Create Journal Entry
+        </a>
+      </div>
+      <div id="entrymodal" className="modal" style={modalStyle}>
         <div className="modal-content">
           <form onSubmit={onSubmit}>
             <h2 className="text-primary">
@@ -107,9 +108,7 @@ const EntryForm = () => {
               <a
                 onClick={onSubmit}
                 href="#!"
-                className={`btn btn-primary btn-block ${
-                  log !== "" && effective !== "" && "modal-close"
-                }`}
+                className="btn btn-primary btn-block modal-close"
               >
                 {current ? "Update Entry" : "Add Entry"}{" "}
               </a>
@@ -131,8 +130,8 @@ const EntryForm = () => {
 };
 
 const modalStyle = {
-  width: "75%",
-  height: "75%",
+  width: "85%",
+  height: "90%",
 };
 
 export default EntryForm;
